@@ -1,5 +1,5 @@
 <template>
-  <van-nav-bar title="通知" :style="`padding-top:${safeHeights.top}px;`" left-arrow @click-left="onClickLeft" />
+  <van-nav-bar safe-area-inset-top title="通知" left-arrow @click-left="onClickLeft" />
   <div class="page-content">
     <p class="title">{{ mainData.title }}</p>
     <p class="date">{{ `发表于${mainData.date}` }}</p>
@@ -9,13 +9,11 @@
 
 <script setup lang="ts">
 import { reactive } from 'vue';
-import { useRoute } from 'vue-router';
-import { useSafeHeightStore } from '@/stores/safeHeight';
+import { useRoute, useRouter } from 'vue-router';
 import noticeData from '@/db/notifications.json';
-import router from '@/router';
 
-const safeHeights = useSafeHeightStore();
 const route = useRoute();
+const router = useRouter();
 
 const mainData = reactive({
   "title": "",
@@ -25,7 +23,7 @@ const mainData = reactive({
 
 const _loadNoticeByIndex = () => {
   let i = route.query.index;
-  const target = noticeData[i];
+  const target = noticeData[i as unknown as number];
   mainData.title = target.title;
   mainData.content = target.content;
   mainData.date = target.date;

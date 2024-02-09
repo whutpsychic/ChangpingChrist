@@ -52,7 +52,6 @@ import noticeData from '@/db/notifications.json';
 
 const introduceText = ref(description);
 
-
 </script>
 
 <style scoped>

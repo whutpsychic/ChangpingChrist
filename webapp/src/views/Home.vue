@@ -1,8 +1,8 @@
 <template>
   <main>
-    <van-nav-bar title="长春市昌平基督教会" :style="`padding-top:${safeHeights.top}px;`" />
+    <van-nav-bar safe-area-inset-top title="神就是爱" />
     <router-view></router-view>
-    <van-tabbar v-model="active" :style="`padding-bottom:${safeHeights.bottom}px;`" @change="onChangTab">
+    <van-tabbar safe-area-inset-bottom v-model="active" @change="onChangTab">
       <van-tabbar-item icon="newspaper-o" name="info">资讯</van-tabbar-item>
       <van-tabbar-item icon="video-o" name="live">直播</van-tabbar-item>
       <van-tabbar-item icon="fire-o" name="entertainment">娱乐</van-tabbar-item>
@@ -13,11 +13,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { RouterView, useRouter, useRoute } from 'vue-router';
-import { useSafeHeightStore } from '@/stores/safeHeight';
 
 const route = useRoute();
 const router = useRouter();
-const safeHeights = useSafeHeightStore();
 
 const active = ref('info');
 

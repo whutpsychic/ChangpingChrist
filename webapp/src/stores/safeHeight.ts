@@ -1,3 +1,4 @@
+// 本文件已经作废
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 

@@ -8,7 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AppContainerMain: typeof import('./src/components/app-container/main.vue')['default']
-    copy: typeof import('./src/components/NoticeCard copy.vue')['default']
+    copy: typeof import('./src/components/NoticeItem copy.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     IconsIconCommunity: typeof import('./src/components/icons/IconCommunity.vue')['default']
     IconsIconDocumentation: typeof import('./src/components/icons/IconDocumentation.vue')['default']
@@ -16,6 +16,8 @@ declare module 'vue' {
     IconsIconSupport: typeof import('./src/components/icons/IconSupport.vue')['default']
     IconsIconTooling: typeof import('./src/components/icons/IconTooling.vue')['default']
     Live: typeof import('./src/components/Live.vue')['default']
+    LiveVideoCard: typeof import('./src/components/LiveVideoCard.vue')['default']
+    LiveVideoItem: typeof import('./src/components/LiveVideoItem.vue')['default']
     NoticeCard: typeof import('./src/components/NoticeCard.vue')['default']
     NoticeItem: typeof import('./src/components/NoticeItem.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

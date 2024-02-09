@@ -42,6 +42,6 @@ init();
 // 偶尔会掉环，使用这个函数来重新加载
 intervalKey = setInterval(() => {
   window.location.reload(true);
-}, 500)
+}, 800)
 
 </script>

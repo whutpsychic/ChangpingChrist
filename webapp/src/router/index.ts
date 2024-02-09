@@ -41,6 +41,11 @@ const router = createRouter({
         }
       ]
     },
+    // 通知细节页
+    {
+      path: '/notice',
+      component: () => import('../views/NoticeDetail.vue'),
+    },
   ]
 })
 

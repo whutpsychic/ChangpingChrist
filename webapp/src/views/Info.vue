@@ -1,6 +1,8 @@
 <template>
   <div class="page-content">
+    <!-- 介绍文字 -->
     <p class="introduction">{{ introduceText }}</p>
+    <!-- 轮播图 -->
     <van-swipe class="my-swipe" :autoplay="5000" indicator-color="white">
       <van-swipe-item>
         <img alt="" class="swipe-img" src="@/assets/swipe/1.jpg" />
@@ -34,15 +36,21 @@
         </div>
       </van-swipe-item>
     </van-swipe>
+    <div style="height:15px;"></div>
+    <!-- 通知消息 -->
+    <NoticeCard :data="noticeData" />
+    <!-- 占位高度 -->
+    <div style="height:40px;"></div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import NoticeCard from '../components/NoticeCard.vue';
+import description from '@/db/description.json';
+import noticeData from '@/db/notifications.json';
 
-const introduceText = ref(`这里是一些关于昌平教会的介绍文字，现在我不知道该放些什么内容，我也不是很了解这座教堂的发展历史，我只知道三十年前那里曾经是个售卖粮油的站点平房；三十年河东，三十年河西，如今这里已经是人丁兴旺的基督教堂了，实在是可喜可贺。`)
-
-
+const introduceText = ref(description);
 
 
 </script>
@@ -56,6 +64,7 @@ const introduceText = ref(`这里是一些关于昌平教会的介绍文字，�
 
 .my-swipe {
   border-radius: 10px;
+  box-shadow: 2px 2px 6px 2px rgba(0, 0, 0, 0.8);
 }
 
 .swipe-img {

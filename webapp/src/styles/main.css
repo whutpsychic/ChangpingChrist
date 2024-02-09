@@ -3,10 +3,9 @@
   padding: 0;
 }
 
-div,
-p,
-span {
+html{
   font-size: 15px;
+  background-color: #f8f8f8;
 }
 
 @font-face {

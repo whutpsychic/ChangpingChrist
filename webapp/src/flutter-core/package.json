@@ -1,0 +1,42 @@
+{
+  "_from": "flutter-core",
+  "_id": "flutter-core@0.0.1",
+  "_inBundle": false,
+  "_integrity": "sha512-VsMJnLMSLd17/uEHUxIk4g8L5+xxJovzD+Amo3GpibqQS9cENdocc6aF/K5MqAtWlWbA+5UzQsrV+IuWqw+Yzg==",
+  "_location": "/flutter-core",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "flutter-core",
+    "name": "flutter-core",
+    "escapedName": "flutter-core",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/flutter-core/-/flutter-core-0.0.1.tgz",
+  "_shasum": "098c9603e756aff3c5e0f7570c0fde8449428685",
+  "_spec": "flutter-core",
+  "_where": "F:\\GitRepositories\\_mobile\\vue3",
+  "author": {
+    "name": "zbc"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "rtzl's flutter hybrid app logic core",
+  "keywords": [
+    "whutpsychic"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "flutter-core",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "0.0.1"
+}

@@ -2,7 +2,7 @@
   <van-nav-bar safe-area-inset-top title="通知" left-arrow @click-left="onClickLeft" />
   <div class="page-content">
     <p class="title">{{ mainData.title }}</p>
-    <p class="date">{{ `发表于${mainData.date}` }}</p>
+    <p class="date">{{ `发表于 ${mainData.date}` }}</p>
     <p class="content">{{ mainData.content }}</p>
   </div>
 </template>
@@ -38,25 +38,25 @@ _loadNoticeByIndex();
 </script>
 
 <style scoped>
-p {
-  font-family: 'HanYi';
-}
-
 .title {
-  font-size: 24px;
+  font-size: 18px;
   font-weight: bold;
   text-align: center;
   margin-bottom: 1em;
 }
 
 .date {
-  font-size: 18px;
+  font-size: 16px;
   color: #aaa;
   margin: 1em 0;
 }
 
 .content {
-  font-size: 20px;
-
+  padding: 10px 20px;
+  padding-top: 0;
+  font-size: 17px;
+  line-height: 1.8em;
+  letter-spacing: 2px;
+  text-indent: 2em;
 }
 </style>

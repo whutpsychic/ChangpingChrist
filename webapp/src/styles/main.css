@@ -15,6 +15,12 @@ html {
   src: url('../assets/font/HanYiYanKaiW-2.ttf');
 }
 
+/* 仅英文字母 */
+/* @font-face {
+  font-family: 'Spider';
+  src: url('../assets/font/SecretMidnight-518n8.otf');
+} */
+
 /* -------------------------------- */
 .page-content {
   padding: 10px;

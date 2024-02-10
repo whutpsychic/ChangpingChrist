@@ -12,7 +12,9 @@ html {
 
 @font-face {
   font-family: 'HanYi';
-  src: url('../assets/font/HanYiYanKaiW-2.ttf');
+  src: url('../assets/font/HanYiYanKaiW-2.ttf')format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 /* 仅英文字母 */

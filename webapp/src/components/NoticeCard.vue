@@ -1,3 +1,4 @@
+<!-- 公告板 -->
 <template>
   <div class="notice-card-can">
     <p class="title">公告</p>
@@ -22,6 +23,7 @@ const props = defineProps({
   background-color: white;
   border-radius: 10px;
   padding: 1em;
+  box-shadow: 2px 2px 6px 2px rgba(0, 0, 0, 0.2);
 }
 
 p.title {

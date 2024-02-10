@@ -1,3 +1,4 @@
+<!-- 公告条目 -->
 <template>
   <div class="notice-item" @click="_gotoNoticeDetail">
     <div class="left-icon">

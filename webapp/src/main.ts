@@ -3,6 +3,7 @@ import { createPinia } from 'pinia';
 
 import App from './App.vue';
 import router from './router';
+import 'vant/lib/index.css';
 
 import './styles/main.css';
 import './styles/new-year/main.css';

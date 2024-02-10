@@ -1,3 +1,4 @@
+<!-- 直播条目 -->
 <template>
   <div class="live-video-card" @click="_gotoLiveView">
     <div class="left-icon">
@@ -32,7 +33,7 @@ const _gotoLiveView = () => {
   background-color: white;
   border-radius: 10px;
   padding: 12px;
-  box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.3);
 
 }
 

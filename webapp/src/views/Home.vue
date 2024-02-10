@@ -1,6 +1,10 @@
 <template>
   <main>
-    <van-nav-bar safe-area-inset-top title="神就是爱" />
+    <van-nav-bar safe-area-inset-top>
+      <template #title>
+        <p class="topbar-title">神就是爱</p>
+      </template>
+    </van-nav-bar>
     <router-view></router-view>
     <van-tabbar safe-area-inset-bottom v-model="active" @change="onChangTab">
       <van-tabbar-item icon="newspaper-o" name="info">资讯</van-tabbar-item>

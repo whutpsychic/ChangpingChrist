@@ -46,6 +46,11 @@ const router = createRouter({
       path: '/notice',
       component: () => import('../views/NoticeDetail.vue'),
     },
+    // MBTI测试
+    {
+      path: '/MBTI',
+      component: () => import('../views/TestMBTI.vue'),
+    }
   ]
 })
 

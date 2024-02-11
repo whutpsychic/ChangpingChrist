@@ -145,7 +145,7 @@ class Answerobj {
 
 const router = useRouter();
 // 显示初始遮罩层
-const showPreInfo = ref(false);
+const showPreInfo = ref(true);
 // 当前题号
 const qIndex = ref(0);
 // 答案记录器组

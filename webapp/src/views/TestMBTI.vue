@@ -437,6 +437,13 @@ const viewAnswer = () => {
   }, 5500);
 }
 
+// setTimeout(() => {
+//   for (let i = 0; i < 91; i++) {
+//     answers.push({ index: i + 1, a: Math.random() > 0.5 ? 'A' : 'B' })
+//   }
+//   viewAnswer();
+// }, 300)
+
 </script>
 
 <style scoped>

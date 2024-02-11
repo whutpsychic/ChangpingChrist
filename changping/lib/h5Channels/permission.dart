@@ -7,7 +7,7 @@ import '../appConfig.dart';
 
 // 创建 JavascriptChannel
 // 预留的权限请求通道
-void registerPermissionChannel(
+Future<void> registerPermissionChannel(
     BuildContext context, WebMessagePort port, WebMessage? message) async {
   String? mainInfo = message?.data;
   if (mainInfo == null) {

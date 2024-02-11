@@ -40,7 +40,7 @@
     <!-- 通知消息 -->
     <NoticeCard :data="noticeData" />
     <!-- 占位高度 -->
-    <div style="height:40px;"></div>
+    <div style="height:50px;"></div>
   </div>
 </template>
 

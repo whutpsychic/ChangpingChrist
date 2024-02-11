@@ -177,6 +177,52 @@ class MyAppState extends State<MyApp> {
     flutterPort.postMessage(WebMessage(data: "takePhoto('$result')"));
   }
 
+  _onload(controller, url) async {
+    try {
+      // 加载完毕后记录当前web地址
+      if (!(h5url == '')) {
+        setState(() {
+          h5url = url.toString();
+        });
+      }
+      // 仅android或者支持创建 web message 通道的平台生效
+      if (defaultTargetPlatform != TargetPlatform.android ||
+          await WebViewFeature.isFeatureSupported(
+              WebViewFeature.CREATE_WEB_MESSAGE_CHANNEL)) {
+        // wait until the page is loaded, and then create the Web Message Channel
+        var webMessageChannel = await controller.createWebMessageChannel();
+        // 主操作端口
+        var port1 = webMessageChannel.port1;
+        // 传递给web用于交互的端口
+        var port2 = webMessageChannel.port2;
+
+        // 记录在册
+        flutterPort = port1;
+        // set the web message callback for the port1
+        await port1.setWebMessageCallback((message) {
+          if (kDebugMode) {
+            print(' -------------------------------- from js ');
+            print(message);
+          }
+
+          // 注册所有服务接口
+          registerServiceChannel(context, port1, message);
+          // 注册权限接口
+          registerPermissionChannel(context, port1, message);
+        });
+
+        // transfer port2 to the webpage to initialize the communication
+        await controller.postWebMessage(
+            message: WebMessage(data: "initFlutterPort", ports: [port2]),
+            targetOrigin: WebUri("*"));
+      }
+    } catch (err) {
+      if (kDebugMode) {
+        print(err);
+      }
+    }
+  }
+
   // 构建主显示口
   Widget _buildMainView() {
     return Column(
@@ -194,11 +240,10 @@ class MyAppState extends State<MyApp> {
               // key: webViewKey,
               initialUrlRequest: URLRequest(url: WebUri(h5url)),
               initialSettings: settings,
-              onWebViewCreated: (controller) {
+              onWebViewCreated: (InAppWebViewController controller) {
                 webViewController = controller;
-                // _loadH5();
+                InAppWebViewController.clearAllCache();
               },
-              onLoadStart: (controller, url) {},
               onPermissionRequest: (controller, request) async {
                 return PermissionResponse(
                     resources: request.resources,
@@ -229,49 +274,8 @@ class MyAppState extends State<MyApp> {
 
                 return NavigationActionPolicy.ALLOW;
               },
-              onLoadStop: (controller, url) async {
-                // 加载完毕后记录当前web地址
-                if (!(h5url == '')) {
-                  setState(() {
-                    h5url = url.toString();
-                  });
-                }
-                // 仅android或者支持创建 web message 通道的平台生效
-                if (defaultTargetPlatform != TargetPlatform.android ||
-                    await WebViewFeature.isFeatureSupported(
-                        WebViewFeature.CREATE_WEB_MESSAGE_CHANNEL)) {
-                  // wait until the page is loaded, and then create the Web Message Channel
-                  var webMessageChannel =
-                      await controller.createWebMessageChannel();
-                  // 主操作端口
-                  var port1 = webMessageChannel!.port1;
-                  // 传递给web用于交互的端口
-                  var port2 = webMessageChannel.port2;
-
-                  // 记录在册
-                  setState(() {
-                    flutterPort = port1;
-                  });
-                  // set the web message callback for the port1
-                  await port1.setWebMessageCallback((message) async {
-                    if (kDebugMode) {
-                      print(' -------------------------------- from js ');
-                      print(message);
-                    }
-
-                    // 注册所有服务接口
-                    registerServiceChannel(context, port1, message);
-                    // 注册权限接口
-                    registerPermissionChannel(context, port1, message);
-                  });
-
-                  // transfer port2 to the webpage to initialize the communication
-                  await controller.postWebMessage(
-                      message:
-                          WebMessage(data: "initFlutterPort", ports: [port2]),
-                      targetOrigin: WebUri("*"));
-                }
-              },
+              onLoadStart: (controller, url) {},
+              onLoadStop: _onload,
               onReceivedError: (controller, request, error) {
                 if (kDebugMode) {
                   print(" --------------------------------- onReceivedError ");

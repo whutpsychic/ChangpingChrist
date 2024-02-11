@@ -13,7 +13,7 @@ import '../main.dart';
 
 // 创建 JavascriptChannel
 // 预留的调用服务通道（直接发起动作）
-void registerServiceChannel(
+Future<void> registerServiceChannel(
     BuildContext context, WebMessagePort port, WebMessage? message) async {
   String? mainInfo = message?.data;
   if (mainInfo == null) {

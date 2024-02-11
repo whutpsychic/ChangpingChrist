@@ -1,0 +1,25 @@
+@import './vant.css';
+
+/* 声明字体 */
+@font-face {
+  font-family: 'HanYi';
+  src: url('@/assets/font/HanYiYanKaiW-2.ttf')format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 15px;
+  /* background-color: #f8f8f8; */
+  background-color: #fff;
+}
+
+/* -------------------------------- */
+.page-content {
+  padding: 10px;
+}

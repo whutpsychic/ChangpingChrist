@@ -1,0 +1,11 @@
+/* van-nav-bar */
+/* 标题文字 */
+.topbar-title {
+  font-family: 'HanYi';
+  letter-spacing: 0.2em;
+  font-size: 22px;
+}
+
+.van-nav-bar__title {
+  --van-nav-bar-title-font-size: 17px;
+}

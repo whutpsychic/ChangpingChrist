@@ -35,9 +35,9 @@
     </div>
   </div>
   <!-- 查看答案 -->
-  <van-popup v-model:show="showAnswer" position="right" :style="{ height: '100%' }">
+  <van-popup v-model:show="showAnswer" position="right">
     <div class="page-content">
-      <p class="title">MBTI 测试结果</p>
+      <p class="title">您的 MBTI 测试结果</p>
       <van-button type="primary" block @click="showDetails = !showDetails">
         {{ showDetails ? `隐藏细节` : `显示细节` }}
       </van-button>
@@ -131,17 +131,7 @@
 import { ref, unref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { showConfirmDialog } from 'vant';
-import questions from '@/db/MBTI_questions.json';
-
-// 答案记录类
-class Answerobj {
-  index: number;
-  a: string;
-  constructor(index: number, a: string) {
-    this.index = index;
-    this.a = a;
-  };
-}
+import questions from '@/db/questions/MBTI.json';
 
 const router = useRouter();
 // 显示初始遮罩层
@@ -199,7 +189,7 @@ const _allBQuestions = computed(() => {
   });
 });
 
-// ======= E 类得分情况 =======
+// ======= 分类计算的题号 =======
 const scored_EI_Qeuss = [1, 8, 15, 22, 29, 36, 43, 50, 57, 64, 71, 78, 85];
 const scored_SN1_Qeuss = [2, 9, 16, 23, 30, 37, 44, 51, 58, 65, 72, 79, 86];
 const scored_SN2_Qeuss = [3, 10, 17, 24, 31, 38, 45, 52, 59, 66, 73, 80, 87];
@@ -437,12 +427,12 @@ const viewAnswer = () => {
   }, 5500);
 }
 
-// setTimeout(() => {
-//   for (let i = 0; i < 91; i++) {
-//     answers.push({ index: i + 1, a: Math.random() > 0.5 ? 'A' : 'B' })
-//   }
-//   viewAnswer();
-// }, 300)
+setTimeout(() => {
+  for (let i = 0; i < 90; i++) {
+    answers.push({ index: i + 1, a: Math.random() > 0.5 ? 'A' : 'B' })
+  }
+  qIndex.value = 90
+}, 300)
 
 </script>
 

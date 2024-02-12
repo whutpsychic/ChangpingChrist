@@ -4,14 +4,13 @@
   <van-popup v-model:show="showPreInfo" position="bottom" :style="{ height: 'calc(100%)' }">
     <p class="title">恩赐调查表</p>
     <div class="page-content">
-      <p class="prehead">• 精力支配：外向 E — 内向 I</p>
-      <p class="prehead">• 认识世界：实感 S — 直觉 N</p>
-      <p class="prehead">• 判断事物：思维 T — 情感 F</p>
-      <p class="prehead">• 生活态度：判断 J — 知觉 P</p>
-      <div style="height:10px;"></div>
-      <p class="description">你天生的个性是什么呢?从个性测验中你可以找到一些线索，虽然它没有像梅尔博士的性向测验那样复杂精密，但至少它提供了有用的的工具，使你能开始了解自己的个性。</p>
-      <p class="description">本测验题以The Keirsey & Johnson Temperament Sorter(柯西与强生个性性向量表)为主，加上Celebrate my Soul一书作者Dr.
-        Reginald Johnson上课讲义与笔者所设计的题目综合编着而成。</p>
+      <p class="prehead">注意事项：</p>
+      <!-- <div style="height:10px;"></div> -->
+      <p class="description">试问自己对下列陈述有何感觉？每一项的陈述，有多少是符合你本身的情况？请简单地用下列数字来回答以下的问题：</p>
+      <p class="description noindent">
+        <span>5-总是</span><span>4-经常</span><span>3-有时</span><span>2-很少</span><span>1-从不</span>
+      </p>
+      <p class="description">不要犹豫选择“4”或者“1”，渴望使自己谦虚或不夸大会影响你的选择，同时也会影响你测验的结果，请尽可能诚实地回答。</p>
       <div class="operator">
         <van-button type="primary" @click="showPreInfo = false">开始测试</van-button>
       </div>
@@ -19,13 +18,24 @@
   </van-popup>
   <!-- 做题过程 -->
   <div class="main-body">
-    <p class="question-body">{{ `${qIndex + 1}. ${questions[qIndex].question}` }}</p>
-    <!-- 仅两个选项 -->
-    <div :class="`selector-can${answer === 'A' ? ' active' : ''}`" @click="answer = 'A'">
-      <span>{{ `A. ${questions[qIndex].A}` }}</span>
-    </div>
-    <div :class="`selector-can${answer === 'B' ? ' active' : ''}`" @click="answer = 'B'">
-      <span>{{ `B. ${questions[qIndex].B}` }}</span>
+    <div class="ques-body-can">
+      <p class="question-body">{{ `${qIndex + 1}. ${questions[qIndex].question}` }}</p>
+      <!-- 仅两个选项 -->
+      <div :class="`selector-can${answer === 5 ? ' active' : ''}`" @click="answer = 5">
+        <span>{{ `5 - 总是` }}</span>
+      </div>
+      <div :class="`selector-can${answer === 4 ? ' active' : ''}`" @click="answer = 4">
+        <span>{{ `4 - 经常` }}</span>
+      </div>
+      <div :class="`selector-can${answer === 3 ? ' active' : ''}`" @click="answer = 3">
+        <span>{{ `3 - 有时` }}</span>
+      </div>
+      <div :class="`selector-can${answer === 2 ? ' active' : ''}`" @click="answer = 2">
+        <span>{{ `2 - 很少` }}</span>
+      </div>
+      <div :class="`selector-can${answer === 1 ? ' active' : ''}`" @click="answer = 1">
+        <span>{{ `1 - 从不` }}</span>
+      </div>
     </div>
     <div style="height:40px;"></div>
     <div class="nextbtn">
@@ -35,92 +45,10 @@
     </div>
   </div>
   <!-- 查看答案 -->
-  <van-popup v-model:show="showAnswer" position="right" :style="{ height: '100%' }">
-    <div class="page-content">
-      <p class="title">MBTI 测试结果</p>
-      <van-button type="primary" block @click="showDetails = !showDetails">
-        {{ showDetails ? `隐藏细节` : `显示细节` }}
-      </van-button>
-      <div style="height: 20px;" />
-      <div :class="`${showDetails ? 'details' : 'details hide'}`">
-        <p class="content">您的答题情况（共计91题）：</p>
-        <p class="content">选A的题目：{{ _allAQuestions.join('、') }}</p>
-        <p class="content">选B的题目：{{ _allBQuestions.join('、') }}</p>
-      </div>
-
-      <div class="calculated-bar">
-        <div class="twice-group-can">
-          <p class="upper-letter">E -> {{ scoreE }}</p>
-          <p class="upper-letter">I -> {{ scoreI }}</p>
-        </div>
-        <p class="upper-letter"> -> {{ scoreE >= scoreI ? 'E' : 'I' }}</p>
-        <div class="msk" :style="`left:${showE_I ? '100%' : '0'}`"></div>
-      </div>
-
-      <div class="calculated-bar">
-        <div class="twice-group-can">
-          <p class="upper-letter">S -> {{ scoreS }}</p>
-          <p class="upper-letter">N -> {{ scoreN }}</p>
-        </div>
-        <p class="upper-letter"> -> {{ scoreS >= scoreN ? 'S' : 'N' }}</p>
-        <div class="msk" :style="`left:${showS_N ? '100%' : '0'}`"></div>
-      </div>
-
-      <div class="calculated-bar">
-        <div class="twice-group-can">
-          <p class="upper-letter">T -> {{ scoreT }}</p>
-          <p class="upper-letter">F -> {{ scoreF }}</p>
-        </div>
-        <p class="upper-letter"> -> {{ scoreT >= scoreF ? 'T' : 'F' }}</p>
-        <div class="msk" :style="`left:${showT_F ? '100%' : '0'}`"></div>
-      </div>
-
-      <div class="calculated-bar">
-        <div class="twice-group-can">
-          <p class="upper-letter">J -> {{ scoreJ }}</p>
-          <p class="upper-letter">P -> {{ scoreP }}</p>
-        </div>
-        <p class="upper-letter"> -> {{ scoreJ >= scoreP ? 'J' : 'P' }}</p>
-        <div class="msk" :style="`left:${showJ_P ? '100%' : '0'}`"></div>
-      </div>
-
-      <div class="calculated-bar should-wrap">
-        <p class="result-text">
-          您的测试结果为：
-          <span>{{ result }}</span>
-        </p>
-        <table class="result-tb">
-          <tr>
-            <td>思考型</td>
-            <td :class="result === 'ISTP' ? `is-result` : ''">ISTP</td>
-            <td :class="result === 'INTP' ? `is-result` : ''">INTP</td>
-            <td :class="result === 'ESTJ' ? `is-result` : ''">ESTJ</td>
-            <td :class="result === 'ENTJ' ? `is-result` : ''">ENTJ</td>
-          </tr>
-          <tr>
-            <td>感觉型</td>
-            <td :class="result === 'ISFP' ? `is-result` : ''">ISFP</td>
-            <td :class="result === 'INFP' ? `is-result` : ''">INFP</td>
-            <td :class="result === 'ENFJ' ? `is-result` : ''">ENFJ</td>
-            <td :class="result === 'ESFJ' ? `is-result` : ''">ESFJ</td>
-          </tr>
-          <tr>
-            <td>官觉型</td>
-            <td :class="result === 'ISTJ' ? `is-result` : ''">ISTJ</td>
-            <td :class="result === 'ISFJ' ? `is-result` : ''">ISFJ</td>
-            <td :class="result === 'ESTP' ? `is-result` : ''">ESTP</td>
-            <td :class="result === 'ESFP' ? `is-result` : ''">ESFP</td>
-          </tr>
-          <tr>
-            <td>直觉型</td>
-            <td :class="result === 'INTJ' ? `is-result` : ''">INTJ</td>
-            <td :class="result === 'INFJ' ? `is-result` : ''">INFJ</td>
-            <td :class="result === 'ENTP' ? `is-result` : ''">ENTP</td>
-            <td :class="result === 'ENFP' ? `is-result` : ''">ENFP</td>
-          </tr>
-        </table>
-        <div class="msk" :style="`left:${showResult ? '100%' : '0'}`"></div>
-      </div>
+  <van-popup v-model:show="showAnswer" position="right">
+    <div class="result-container">
+      <p class="title">您的恩赐调查结果</p>
+      <div ref="chart" class="chart-container"></div>
       <van-button type="primary" :class="showBackBtn ? 'backbtn' : 'backbtn hide'" block
         @click="router.back();">返回</van-button>
     </div>
@@ -131,17 +59,8 @@
 import { ref, unref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { showConfirmDialog } from 'vant';
-import questions from '@/db/MBTI_questions.json';
-
-// 答案记录类
-class Answerobj {
-  index: number;
-  a: string;
-  constructor(index: number, a: string) {
-    this.index = index;
-    this.a = a;
-  };
-}
+import * as echarts from 'echarts';
+import questions from '@/db/questions/grace.json';
 
 const router = useRouter();
 // 显示初始遮罩层
@@ -151,17 +70,13 @@ const qIndex = ref(0);
 // 答案记录器组
 const answers: Array<Answerobj> = [];
 // 当前题答案
-const answer = ref('');
+const answer = ref(0);
 // 显示题答案计算结果
 const showAnswer = ref(false);
-const showDetails = ref(true);
 
-const showE_I = ref(false);
-const showS_N = ref(false);
-const showT_F = ref(false);
-const showJ_P = ref(false);
-const showResult = ref(false);
 const showBackBtn = ref(false);
+
+const chart = ref(null);
 
 // 后退事件
 const backup = () => {
@@ -185,211 +100,188 @@ const _isLastQuestion = computed(() => {
   return unref(qIndex) >= questions.length - 1;
 });
 
-// 所有选A的题号
-const _allAQuestions = computed(() => {
-  return answers.filter((item) => { return item.a === 'A' }).map((item) => {
-    return item.index;
-  });
-});
+// ======= 分类计算的题号 =======
+const scored_A_Qeuss = [1, 17, 33, 49, 65, 81, 97, 113];
+const scored_B_Qeuss = [2, 18, 34, 50, 66, 82, 98, 114];
+const scored_C_Qeuss = [3, 19, 35, 51, 67, 83, 99, 115];
+const scored_D_Qeuss = [4, 20, 36, 52, 68, 84, 100, 116];
+const scored_E_Qeuss = [5, 21, 37, 53, 69, 85, 101, 117];
+const scored_F_Qeuss = [6, 22, 38, 54, 70, 86, 102, 118];
+const scored_G_Qeuss = [7, 23, 39, 55, 71, 87, 103, 119];
+const scored_H_Qeuss = [8, 24, 40, 56, 72, 88, 104, 120];
+const scored_I_Qeuss = [9, 25, 41, 57, 73, 89, 105, 121];
+const scored_J_Qeuss = [10, 26, 42, 58, 74, 90, 106, 122];
+const scored_K_Qeuss = [11, 27, 43, 59, 75, 91, 107, 123];
+const scored_L_Qeuss = [12, 28, 44, 60, 76, 92, 108, 124];
+const scored_M_Qeuss = [13, 29, 45, 61, 77, 93, 109, 125];
+const scored_N_Qeuss = [14, 30, 46, 62, 78, 94, 110, 126];
+const scored_O_Qeuss = [15, 31, 47, 63, 79, 95, 111, 127];
+const scored_P_Qeuss = [16, 32, 48, 64, 80, 96, 112, 128];
 
-// 所有选B的题号
-const _allBQuestions = computed(() => {
-  return answers.filter((item) => { return item.a === 'B' }).map((item) => {
-    return item.index;
-  });
-});
-
-// ======= E 类得分情况 =======
-const scored_EI_Qeuss = [1, 8, 15, 22, 29, 36, 43, 50, 57, 64, 71, 78, 85];
-const scored_SN1_Qeuss = [2, 9, 16, 23, 30, 37, 44, 51, 58, 65, 72, 79, 86];
-const scored_SN2_Qeuss = [3, 10, 17, 24, 31, 38, 45, 52, 59, 66, 73, 80, 87];
-const scored_TF1_Qeuss = [4, 11, 18, 25, 32, 39, 46, 53, 60, 67, 74, 81, 88];
-const scored_TF2_Qeuss = [5, 12, 19, 26, 33, 40, 47, 54, 61, 68, 75, 82, 89];
-const scored_JP1_Qeuss = [6, 13, 20, 27, 34, 41, 48, 55, 62, 69, 76, 83, 90];
-const scored_JP2_Qeuss = [7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91];
-
-// ======= E 类得分情况 =======
-const scoreE = computed(() => {
-  let result = 0;
-  scored_EI_Qeuss.forEach((item) => {
-    let target = answers.find((an) => {
-      return an.index === item;
-    })
-
-    if (!!target && (target.a === 'A')) {
-      result++;
-    }
-  })
-  return result;
-})
-
-// ======= I 类得分情况 =======
-const scoreI = computed(() => {
-  let result = 0;
-  scored_EI_Qeuss.forEach((item) => {
-    let target = answers.find((an) => {
-      return an.index === item;
-    })
-
-    if (!!target && (target.a === 'B')) {
-      result++;
-    }
-  })
-  return result;
-})
-
-// ======= S 类得分情况 =======
-const scoreS = computed(() => {
-  let result = 0;
-  scored_SN1_Qeuss.forEach((item) => {
-    let target = answers.find((an) => {
-      return an.index === item;
-    })
-
-    if (!!target && (target.a === 'A')) {
-      result++;
-    }
-  })
-  scored_SN2_Qeuss.forEach((item) => {
-    let target = answers.find((an) => {
-      return an.index === item;
-    })
-
-    if (!!target && (target.a === 'A')) {
-      result++;
-    }
-  })
-  return result;
-})
-
-// ======= N 类得分情况 =======
-const scoreN = computed(() => {
-  let result = 0;
-  scored_SN1_Qeuss.forEach((item) => {
-    let target = answers.find((an) => {
-      return an.index === item;
-    })
-
-    if (!!target && (target.a === 'B')) {
-      result++;
-    }
-  })
-  scored_SN2_Qeuss.forEach((item) => {
-    let target = answers.find((an) => {
-      return an.index === item;
-    })
-
-    if (!!target && (target.a === 'B')) {
-      result++;
-    }
-  })
-  return result;
-})
-
-// ======= T 类得分情况 =======
-const scoreT = computed(() => {
-  let result = 0;
-  scored_TF1_Qeuss.forEach((item) => {
-    let target = answers.find((an) => {
-      return an.index === item;
-    })
-
-    if (!!target && (target.a === 'A')) {
-      result++;
-    }
-  })
-  scored_TF2_Qeuss.forEach((item) => {
-    let target = answers.find((an) => {
-      return an.index === item;
-    })
-
-    if (!!target && (target.a === 'A')) {
-      result++;
-    }
-  })
-  return result;
-})
-
-// ======= N 类得分情况 =======
-const scoreF = computed(() => {
-  let result = 0;
-  scored_TF1_Qeuss.forEach((item) => {
-    let target = answers.find((an) => {
-      return an.index === item;
-    })
-
-    if (!!target && (target.a === 'B')) {
-      result++;
-    }
-  })
-  scored_TF2_Qeuss.forEach((item) => {
-    let target = answers.find((an) => {
-      return an.index === item;
-    })
-
-    if (!!target && (target.a === 'B')) {
-      result++;
-    }
-  })
-  return result;
-})
-
-// ======= J 类得分情况 =======
-const scoreJ = computed(() => {
-  let result = 0;
-  scored_JP1_Qeuss.forEach((item) => {
-    let target = answers.find((an) => {
-      return an.index === item;
-    })
-
-    if (!!target && (target.a === 'A')) {
-      result++;
-    }
-  })
-  scored_JP2_Qeuss.forEach((item) => {
-    let target = answers.find((an) => {
-      return an.index === item;
-    })
-
-    if (!!target && (target.a === 'A')) {
-      result++;
-    }
-  })
-  return result;
-})
-
-// ======= P 类得分情况 =======
-const scoreP = computed(() => {
-  let result = 0;
-  scored_JP1_Qeuss.forEach((item) => {
-    let target = answers.find((an) => {
-      return an.index === item;
-    })
-
-    if (!!target && (target.a === 'B')) {
-      result++;
-    }
-  })
-  scored_JP2_Qeuss.forEach((item) => {
-    let target = answers.find((an) => {
-      return an.index === item;
-    })
-
-    if (!!target && (target.a === 'B')) {
-      result++;
-    }
-  })
-  return result;
-})
-
-// 最终结果字符串
+// ======= 总得分情况 =======
 const result = computed(() => {
-  let _result = '';
+  // ------------- scoreA -------------
+  let scoreA = 0;
+  scored_A_Qeuss.forEach((item) => {
+    let target = answers.find((_item) => {
+      return _item.index === item;
+    })
+    if (!!target && typeof (target.a) === 'number') {
+      scoreA += target.a;
+    }
+  })
+  // ------------- scoreB -------------
+  let scoreB = 0;
+  scored_B_Qeuss.forEach((item) => {
+    let target = answers.find((_item) => {
+      return _item.index === item;
+    })
+    if (!!target && typeof (target.a) === 'number') {
+      scoreB += target.a;
+    }
+  })
+  // ------------- scoreC -------------
+  let scoreC = 0;
+  scored_C_Qeuss.forEach((item) => {
+    let target = answers.find((_item) => {
+      return _item.index === item;
+    })
+    if (!!target && typeof (target.a) === 'number') {
+      scoreC += target.a;
+    }
+  })
+  // ------------- scoreD -------------
+  let scoreD = 0;
+  scored_D_Qeuss.forEach((item) => {
+    let target = answers.find((_item) => {
+      return _item.index === item;
+    })
+    if (!!target && typeof (target.a) === 'number') {
+      scoreD += target.a;
+    }
+  })
+  // ------------- scoreE -------------
+  let scoreE = 0;
+  scored_E_Qeuss.forEach((item) => {
+    let target = answers.find((_item) => {
+      return _item.index === item;
+    })
+    if (!!target && typeof (target.a) === 'number') {
+      scoreE += target.a;
+    }
+  })
+  // ------------- scoreF -------------
+  let scoreF = 0;
+  scored_F_Qeuss.forEach((item) => {
+    let target = answers.find((_item) => {
+      return _item.index === item;
+    })
+    if (!!target && typeof (target.a) === 'number') {
+      scoreF += target.a;
+    }
+  })
+  // ------------- scoreG -------------
+  let scoreG = 0;
+  scored_G_Qeuss.forEach((item) => {
+    let target = answers.find((_item) => {
+      return _item.index === item;
+    })
+    if (!!target && typeof (target.a) === 'number') {
+      scoreG += target.a;
+    }
+  })
+  // ------------- scoreH -------------
+  let scoreH = 0;
+  scored_H_Qeuss.forEach((item) => {
+    let target = answers.find((_item) => {
+      return _item.index === item;
+    })
+    if (!!target && typeof (target.a) === 'number') {
+      scoreH += target.a;
+    }
+  })
+  // ------------- scoreI -------------
+  let scoreI = 0;
+  scored_I_Qeuss.forEach((item) => {
+    let target = answers.find((_item) => {
+      return _item.index === item;
+    })
+    if (!!target && typeof (target.a) === 'number') {
+      scoreI += target.a;
+    }
+  })
+  // ------------- scoreJ -------------
+  let scoreJ = 0;
+  scored_J_Qeuss.forEach((item) => {
+    let target = answers.find((_item) => {
+      return _item.index === item;
+    })
+    if (!!target && typeof (target.a) === 'number') {
+      scoreJ += target.a;
+    }
+  })
+  // ------------- scoreK -------------
+  let scoreK = 0;
+  scored_K_Qeuss.forEach((item) => {
+    let target = answers.find((_item) => {
+      return _item.index === item;
+    })
+    if (!!target && typeof (target.a) === 'number') {
+      scoreK += target.a;
+    }
+  })
+  // ------------- scoreL -------------
+  let scoreL = 0;
+  scored_L_Qeuss.forEach((item) => {
+    let target = answers.find((_item) => {
+      return _item.index === item;
+    })
+    if (!!target && typeof (target.a) === 'number') {
+      scoreL += target.a;
+    }
+  })
+  // ------------- scoreM -------------
+  let scoreM = 0;
+  scored_M_Qeuss.forEach((item) => {
+    let target = answers.find((_item) => {
+      return _item.index === item;
+    })
+    if (!!target && typeof (target.a) === 'number') {
+      scoreM += target.a;
+    }
+  })
+  // ------------- scoreN -------------
+  let scoreN = 0;
+  scored_N_Qeuss.forEach((item) => {
+    let target = answers.find((_item) => {
+      return _item.index === item;
+    })
+    if (!!target && typeof (target.a) === 'number') {
+      scoreN += target.a;
+    }
+  })
+  // ------------- scoreO -------------
+  let scoreO = 0;
+  scored_O_Qeuss.forEach((item) => {
+    let target = answers.find((_item) => {
+      return _item.index === item;
+    })
+    if (!!target && typeof (target.a) === 'number') {
+      scoreO += target.a;
+    }
+  })
+  // ------------- scoreP -------------
+  let scoreP = 0;
+  scored_P_Qeuss.forEach((item) => {
+    let target = answers.find((_item) => {
+      return _item.index === item;
+    })
+    if (!!target && typeof (target.a) === 'number') {
+      scoreP += target.a;
+    }
+  })
 
-  scoreE.value >= scoreI.value ? _result += 'E' : _result += 'I';
-  scoreS.value >= scoreN.value ? _result += 'S' : _result += 'N';
-  scoreT.value >= scoreF.value ? _result += 'T' : _result += 'F';
-  scoreJ.value >= scoreP.value ? _result += 'J' : _result += 'P';
+  let _result: Array<number> = [scoreA, scoreB, scoreC, scoreD, scoreE, scoreF, scoreG, scoreH, scoreI, scoreJ, scoreK, scoreL, scoreM, scoreN, scoreO, scoreP];
 
   return _result;
 })
@@ -399,7 +291,7 @@ const next = () => {
   // 记录答案
   answers.push({ index: unref(qIndex) + 1, a: unref(answer) });
   // 清除当前答案
-  answer.value = '';
+  answer.value = 0;
   // ---------------
   // 交卷并查看答案
   if (unref(_isLastQuestion)) {
@@ -414,34 +306,65 @@ const next = () => {
 // 揭晓答案
 const viewAnswer = () => {
   showAnswer.value = true;
+
+  // 找到前三名分数
+  let target = [...unref(result)]
+  target.sort((a, b) => { return b - a; });
+
+  // 展示图表
   setTimeout(() => {
-    showE_I.value = true;
-  }, 560);
-  setTimeout(() => {
-    showS_N.value = true;
-  }, 1500);
-  setTimeout(() => {
-    showT_F.value = true;
-  }, 2500);
-  setTimeout(() => {
-    showJ_P.value = true;
-  }, 3500);
-  setTimeout(() => {
-    showDetails.value = false;
-  }, 4000);
-  setTimeout(() => {
-    showResult.value = true;
-  }, 4500);
+    const myChart = echarts.init(chart.value);
+
+    // 指定图表的配置项和数据
+    const categories = ['行政治理', '使徒', '分辨', '传福音', '关怀', '信心', '施予', '接待', '知识', '领导', '怜悯', '先知', '牧师', '服事', '教导', '智慧'];
+    const option = {
+      grid: {
+        top: '5%',
+        left: '25%',
+        right: '15%'
+      },
+      tooltip: {},
+      xAxis: {
+        min: 0,
+        max: 40,
+        axisLabel: { color: "#000", fontWeight: 'bold', fontSize: 18 },
+      },
+      yAxis: {
+        axisLabel: { color: "#000", fontWeight: 'bold', fontSize: 17 },
+        data: categories
+      },
+      series: [
+        {
+          name: '分数',
+          type: 'bar',
+          data: unref(result).map((item, i) => {
+            const _isf3d = (item === target[0] || item === target[1] || item === target[2])
+            return {
+              name: categories[i], value: item,
+              itemStyle: { color: _isf3d ? 'red' : '#389edc' },
+              label: { show: true, position: 'right', fontSize: 18, color: _isf3d ? 'red' : '#233' }
+            }
+          })
+        }
+      ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+  }, 300);
+
   setTimeout(() => {
     showBackBtn.value = true;
-  }, 5500);
+  }, 2000);
 }
 
+// ------- test -------
 // setTimeout(() => {
-//   for (let i = 0; i < 91; i++) {
-//     answers.push({ index: i + 1, a: Math.random() > 0.5 ? 'A' : 'B' })
+//   for (let i = 0; i < 126; i++) {
+//     let _a = parseInt(`${Math.random() * 10}`);
+//     answers.push({ index: i + 1, a: _a > 5 ? _a - 5 : _a })
 //   }
-//   viewAnswer();
+//   qIndex.value = 127;
 // }, 300)
 
 </script>
@@ -450,6 +373,11 @@ const viewAnswer = () => {
 .page-content {
   background-color: white;
   padding: 20px;
+}
+
+.result-container {
+  width: 100vw;
+  min-height: calc(100vh - 50px);
 }
 
 p.title {
@@ -472,6 +400,15 @@ p.description {
   margin-bottom: 0.8em;
 }
 
+p.description.noindent {
+  text-indent: 0;
+  text-align: center;
+}
+
+p.description span {
+  margin: 0 0.5em;
+}
+
 .operator {
   display: flex;
   justify-content: center;
@@ -491,8 +428,8 @@ p.question-body {
 
 .selector-can {
   font-size: 18px;
-  margin: 3em 0em;
-  padding: 2em 1em;
+  margin: 1.5em 0em;
+  padding: 1em 1em;
   background-color: white;
   border: solid 1px #eee;
   border-radius: 10px;
@@ -537,72 +474,23 @@ p.upper-letter {
   font-size: 24px;
 }
 
-.calculated-bar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 10px 0;
-  position: relative;
-  overflow: hidden;
-}
-
-.calculated-bar.should-wrap {
-  flex-wrap: wrap;
-}
-
-.calculated-bar .msk {
-  background-color: white;
-  position: absolute;
-  top: 0;
-  width: 100vw;
-  height: 100%;
-  transition: 1s;
-}
-
-.twice-group-can {
-  width: 100px;
-}
-
-.result-text {
-  font-size: 20px;
-  font-weight: bold;
-  margin: 1em 0;
-}
-
-.result-text span {
-  font-family: 'HanYi';
-}
-
-table.result-tb {
-  width: 80vw;
-  border-top: solid 1px #666;
-  border-spacing: 0px;
-}
-
-table.result-tb td {
-  text-align: center;
-  font-size: 16px;
-  height: 2.5em;
-  border-bottom: solid 1px #666;
-  letter-spacing: 1px;
-  transition: .5s;
-}
-
-table.result-tb td:first-child {
-  font-weight: bold;
-}
-
-table.result-tb td.is-result {
-  font-weight: bold;
-  color: red;
-}
-
 .backbtn {
   transition: .5s;
   margin-top: 30px;
+  margin: 0 2em;
+  width: calc(100vw - 4em);
 }
 
 .backbtn.hide {
   opacity: 0;
+}
+
+.chart-container {
+  min-height: 600px;
+  height: calc(100vh - 180px);
+}
+
+.ques-body-can {
+  min-height: 540px;
 }
 </style>

@@ -23,7 +23,7 @@ const props = defineProps({
 const router = useRouter();
 
 const _gotoPreTest = () => {
-  router.push({ path: `/${props.name}` })
+  router.push({ path: `/test-${props.name}` })
 }
 
 </script>
@@ -39,7 +39,7 @@ const _gotoPreTest = () => {
 }
 
 .left-icon {
-  --icon-size: 80px;
+  --icon-size: 60px;
   width: var(--icon-size);
   height: var(--icon-size);
   margin-right: 1em;
@@ -47,10 +47,11 @@ const _gotoPreTest = () => {
   align-items: center;
 }
 
-.right-content {}
+.right-content {
+  flex-basis: calc(100% - 100px);
+}
 
 .right-content .title {
-  /* flex-basis: 100%; */
   font-size: 16px;
   margin-bottom: 0.5em;
   font-weight: bold;

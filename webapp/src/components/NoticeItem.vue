@@ -24,7 +24,7 @@ const props = defineProps({
 const router = useRouter();
 
 const _gotoNoticeDetail = () => {
-  router.push({ path: '/notice', query: { index: props.index } })
+  router.push({ path: '/notice-detail', query: { index: props.index } })
 }
 
 

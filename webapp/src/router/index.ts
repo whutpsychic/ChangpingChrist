@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import Preopen from '../views/Preopen.vue';
 import Home from '../views/Home.vue';
-import Info from '../views/Info.vue';
+import Info from '../views/HomeInfo.vue';
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -33,23 +33,28 @@ const router = createRouter({
         },
         {
           path: '/home/live',
-          component: () => import('../views/Live.vue'),
+          component: () => import('../views/HomeLive.vue'),
         },
         {
           path: '/home/entertainment',
-          component: () => import('../views/Entertainment.vue'),
+          component: () => import('../views/HomeEntertainment.vue'),
         }
       ]
     },
     // 通知细节页
     {
-      path: '/notice',
+      path: '/notice-detail',
       component: () => import('../views/NoticeDetail.vue'),
     },
     // MBTI测试
     {
-      path: '/MBTI',
+      path: '/test-MBTI',
       component: () => import('../views/TestMBTI.vue'),
+    },
+    // 恩赐调查表
+    {
+      path: '/test-grace',
+      component: () => import('../views/TestGrace.vue'),
     }
   ]
 })

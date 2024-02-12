@@ -9,6 +9,13 @@
           </template>
         </TestCard>
       </li>
+      <li>
+        <TestCard name="grace" title="恩赐调查表" subtitle="你的信仰，你的灵命。">
+          <template #icon>
+            <img alt="." src="@/assets/img/icon-cross.webp" style="width:100%;" />
+          </template>
+        </TestCard>
+      </li>
     </ul>
   </div>
 </template>
@@ -19,8 +26,6 @@ import TestCard from '@/components/TestCard.vue';
 </script>
 
 <style scoped>
-.entertainment-can {}
-
 p.menu-title {
   font-size: 16px;
   font-weight: bold;

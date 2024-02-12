@@ -1,8 +1,8 @@
 <template>
-  <van-nav-bar safe-area-inset-top title="MBTI 性格测试" left-arrow @click-left="backup" />
+  <van-nav-bar safe-area-inset-top title="恩赐调查表" left-arrow @click-left="backup" />
   <!-- 初始遮罩层 -->
   <van-popup v-model:show="showPreInfo" position="bottom" :style="{ height: 'calc(100%)' }">
-    <p class="title">MBTI 性格测试</p>
+    <p class="title">恩赐调查表</p>
     <div class="page-content">
       <p class="prehead">• 精力支配：外向 E — 内向 I</p>
       <p class="prehead">• 认识世界：实感 S — 直觉 N</p>

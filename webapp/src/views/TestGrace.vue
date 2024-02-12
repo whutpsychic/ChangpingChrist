@@ -323,7 +323,6 @@ const viewAnswer = () => {
         left: '25%',
         right: '15%'
       },
-      tooltip: {},
       xAxis: {
         min: 0,
         max: 40,

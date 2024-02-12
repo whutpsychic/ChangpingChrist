@@ -36,7 +36,7 @@
   </div>
   <!-- 查看答案 -->
   <van-popup v-model:show="showAnswer" position="right">
-    <div class="page-content">
+    <div class="page-content result-pan">
       <p class="title">您的 MBTI 测试结果</p>
       <van-button type="primary" block @click="showDetails = !showDetails">
         {{ showDetails ? `隐藏细节` : `显示细节` }}
@@ -427,12 +427,12 @@ const viewAnswer = () => {
   }, 5500);
 }
 
-setTimeout(() => {
-  for (let i = 0; i < 90; i++) {
-    answers.push({ index: i + 1, a: Math.random() > 0.5 ? 'A' : 'B' })
-  }
-  qIndex.value = 90
-}, 300)
+// setTimeout(() => {
+//   for (let i = 0; i < 90; i++) {
+//     answers.push({ index: i + 1, a: Math.random() > 0.5 ? 'A' : 'B' })
+//   }
+//   qIndex.value = 90
+// }, 300)
 
 </script>
 
@@ -594,5 +594,9 @@ table.result-tb td.is-result {
 
 .backbtn.hide {
   opacity: 0;
+}
+
+.page-content.result-pan {
+  min-height: calc(100vh - 40px);
 }
 </style>

@@ -13,7 +13,7 @@ class Configure {
   // 连接到本地开发环境
   // =================== production 产品模式 ===================
   // 连接到正式环境
-  static const AppMode appMode = AppMode.dev;
+  static const AppMode appMode = AppMode.prodution;
 }
 
 // 最终控制结果
@@ -47,7 +47,8 @@ class StaticConfig {
   // h5 调试时的本地运行地址
   static const String devH5url = "http://192.168.1.33:8082";
   // h5 产品运行时的地址
-  static const String productionH5url = "http://192.168.1.33:8082";
+  static const String productionH5url =
+      "https://whutpsychic.gitee.io/changpingchrist";
 
   // 复杂化命名前缀
   static const String preName = "zflutter";
@@ -56,6 +57,5 @@ class StaticConfig {
   static const String argsSpliter = "|_|";
 
   // iOS AppStore 更新地址
-  static const String updateAppStoreUrl =
-      "https://apps.apple.com/us/app/flutter%E7%91%9E%E5%A4%AA/id1582156692";
+  static const String updateAppStoreUrl = "xxxxxxxxxxxxx";
 }

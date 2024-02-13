@@ -357,7 +357,7 @@ const viewAnswer = () => {
   }, 2000);
 }
 
-// ------- test -------
+// ------- 立见答案 -------
 // setTimeout(() => {
 //   for (let i = 0; i < 126; i++) {
 //     let _a = parseInt(`${Math.random() * 10}`);

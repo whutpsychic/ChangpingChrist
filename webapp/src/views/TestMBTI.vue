@@ -427,6 +427,7 @@ const viewAnswer = () => {
   }, 5500);
 }
 
+// ------- 立见答案 -------
 // setTimeout(() => {
 //   for (let i = 0; i < 90; i++) {
 //     answers.push({ index: i + 1, a: Math.random() > 0.5 ? 'A' : 'B' })

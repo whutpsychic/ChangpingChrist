@@ -2,14 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<!-- 允许http链接访问 -->
-	<key>NSAppTransportSecurity</key>
-	<dict>
-    <key>NSAllowsArbitraryLoads</key>
-    <true/>
-	</dict>
 	<key>CFBundleDisplayName</key>
 	<string>昌平教会</string>
 	<key>CFBundleExecutable</key>
@@ -30,6 +26,22 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<!-- 相机权限 -->
+	<key>NSCameraUsageDescription</key>
+	<string>我们需要访问您的照相机才能拍摄照片，拍摄的照片仅用于上传，并且我们保证不会泄漏您的隐私</string>
+	<!-- 照片权限 -->
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>我们需要访问您的相册才能选择已有照片，选择的照片仅用于上传，并且我们保证不会泄漏您的隐私</string>
+	<!-- 麦克风 -->
+	<key>NSMicrophoneUsageDescription</key>
+	<string>我们需要您开放麦克风权限，从而开启语音服务，并且我们保证不会泄漏您的隐私</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -47,9 +59,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
 </dict>
 </plist>

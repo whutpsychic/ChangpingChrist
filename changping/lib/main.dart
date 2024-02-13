@@ -232,7 +232,7 @@ class MyAppState extends State<MyApp> {
       children: <Widget>[
         Expanded(
           child: PopScope(
-            canPop: false,
+            canPop: true,
             onPopInvoked: (didPop) {
               if (didPop) {
                 return;
@@ -314,7 +314,8 @@ class MyAppState extends State<MyApp> {
               builder: (context, state, child) {
                 return SafeArea(
                   // 为搭建沉浸式App考虑放开
-                  top: !state,
+                  top: (defaultTargetPlatform == TargetPlatform.android) ||
+                      !state,
                   // 底部强制安全区
                   bottom: false,
                   child: _buildMainView(),

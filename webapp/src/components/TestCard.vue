@@ -36,6 +36,7 @@ const _gotoPreTest = () => {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 2px 2px 6px 2px rgba(0, 0, 0, 0.5);
+  height: 80px;
 }
 
 .left-icon {

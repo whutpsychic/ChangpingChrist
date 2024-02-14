@@ -1,5 +1,5 @@
 <template>
-  <van-nav-bar safe-area-inset-top title="通知" left-arrow @click-left="onClickLeft" />
+  <van-nav-bar :style="`padding-top:${safeHeights.top}px;`" title="通知" left-arrow @click-left="onClickLeft" />
   <div class="page-content">
     <p class="title">{{ mainData.title }}</p>
     <p class="date">{{ `发表于 ${mainData.date}` }}</p>
@@ -11,6 +11,9 @@
 import { reactive } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import noticeData from '@/db/notifications.json';
+import { useSafeHeightStore } from '@/stores/safeHeight';
+
+const safeHeights = useSafeHeightStore();
 
 const route = useRoute();
 const router = useRouter();

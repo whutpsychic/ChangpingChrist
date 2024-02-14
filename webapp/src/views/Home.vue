@@ -1,12 +1,12 @@
 <template>
   <main>
-    <van-nav-bar safe-area-inset-top>
+    <van-nav-bar :style="`padding-top:${safeHeights.top}px;`">
       <template #title>
         <p class="topbar-title">神就是爱</p>
       </template>
     </van-nav-bar>
     <router-view></router-view>
-    <van-tabbar safe-area-inset-bottom v-model="active" @change="onChangTab">
+    <van-tabbar :style="`padding-bottom:${safeHeights.bottom}px;`" v-model="active" @change="onChangTab">
       <van-tabbar-item icon="newspaper-o" name="info">资讯</van-tabbar-item>
       <van-tabbar-item icon="video-o" name="live">直播</van-tabbar-item>
       <van-tabbar-item icon="fire-o" name="entertainment">娱乐</van-tabbar-item>
@@ -17,9 +17,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { RouterView, useRouter, useRoute } from 'vue-router';
+import { useSafeHeightStore } from '@/stores/safeHeight';
 
 const route = useRoute();
 const router = useRouter();
+
+const safeHeights = useSafeHeightStore();
 
 const active = ref('info');
 

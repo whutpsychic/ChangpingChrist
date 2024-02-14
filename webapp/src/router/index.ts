@@ -1,7 +1,9 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import Preopen from '../views/Preopen.vue';
 import Home from '../views/Home.vue';
-import Info from '../views/HomeInfo.vue';
+import HomeInfo from '../views/HomeInfo.vue';
+import HomeLive from '../views/HomeLive.vue';
+import HomeEntertainment from '../views/HomeEntertainment.vue';
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -29,15 +31,15 @@ const router = createRouter({
       children: [
         {
           path: '/home/info',
-          component: Info,
+          component: HomeInfo,
         },
         {
           path: '/home/live',
-          component: () => import('../views/HomeLive.vue'),
+          component: HomeLive,
         },
         {
           path: '/home/entertainment',
-          component: () => import('../views/HomeEntertainment.vue'),
+          component: HomeEntertainment,
         }
       ]
     },

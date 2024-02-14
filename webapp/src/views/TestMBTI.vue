@@ -1,5 +1,5 @@
 <template>
-  <van-nav-bar safe-area-inset-top title="MBTI 性格测试" left-arrow @click-left="backup" />
+  <van-nav-bar :style="`padding-top:${safeHeights.top}px;`" title="MBTI 性格测试" left-arrow @click-left="backup" />
   <!-- 初始遮罩层 -->
   <van-popup v-model:show="showPreInfo" position="bottom" :style="{ height: 'calc(100%)' }">
     <p class="title">MBTI 性格测试</p>
@@ -132,7 +132,9 @@ import { ref, unref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { showConfirmDialog } from 'vant';
 import questions from '@/db/questions/MBTI.json';
+import { useSafeHeightStore } from '@/stores/safeHeight';
 
+const safeHeights = useSafeHeightStore();
 const router = useRouter();
 // 显示初始遮罩层
 const showPreInfo = ref(true);

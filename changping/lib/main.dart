@@ -180,60 +180,14 @@ class MyAppState extends State<MyApp> {
     flutterPort.postMessage(WebMessage(data: "takePhoto('$result')"));
   }
 
-  _onload(controller, url) async {
-    try {
-      // 加载完毕后记录当前web地址
-      if (!(h5url == '')) {
-        setState(() {
-          h5url = url.toString();
-        });
-      }
-      // 仅android或者支持创建 web message 通道的平台生效
-      if (defaultTargetPlatform != TargetPlatform.android ||
-          await WebViewFeature.isFeatureSupported(
-              WebViewFeature.CREATE_WEB_MESSAGE_CHANNEL)) {
-        // wait until the page is loaded, and then create the Web Message Channel
-        var webMessageChannel = await controller.createWebMessageChannel();
-        // 主操作端口
-        var port1 = webMessageChannel.port1;
-        // 传递给web用于交互的端口
-        var port2 = webMessageChannel.port2;
-
-        // 记录在册
-        flutterPort = port1;
-        // set the web message callback for the port1
-        await port1.setWebMessageCallback((message) {
-          if (kDebugMode) {
-            print(' -------------------------------- from js ');
-            print(message);
-          }
-
-          // 注册所有服务接口
-          registerServiceChannel(context, port1, message);
-          // 注册权限接口
-          registerPermissionChannel(context, port1, message);
-        });
-
-        // transfer port2 to the webpage to initialize the communication
-        await controller.postWebMessage(
-            message: WebMessage(data: "initFlutterPort", ports: [port2]),
-            targetOrigin: WebUri("*"));
-      }
-    } catch (err) {
-      if (kDebugMode) {
-        print(err);
-      }
-    }
-  }
-
   // 构建主显示口
   Widget _buildMainView() {
     return Column(
       children: <Widget>[
         Expanded(
           child: PopScope(
-            canPop: true,
-            onPopInvoked: (didPop) {
+            canPop: false,
+            onPopInvoked: (bool didPop) {
               if (didPop) {
                 return;
               }
@@ -245,7 +199,13 @@ class MyAppState extends State<MyApp> {
               initialSettings: settings,
               onWebViewCreated: (InAppWebViewController controller) {
                 webViewController = controller;
+                // 先清除一切缓存
                 InAppWebViewController.clearAllCache();
+
+                // 注册功能通道函数
+                registerServiceChannel(controller, context);
+                // 注册权限通道函数
+                registerPermissionChannel(controller, context);
               },
               onPermissionRequest: (controller, request) async {
                 return PermissionResponse(
@@ -278,7 +238,20 @@ class MyAppState extends State<MyApp> {
                 return NavigationActionPolicy.ALLOW;
               },
               onLoadStart: (controller, url) {},
-              onLoadStop: _onload,
+              onLoadStop: (controller, url) {
+                try {
+                  // 加载完毕后记录当前web地址
+                  if (!(h5url == '')) {
+                    setState(() {
+                      h5url = url.toString();
+                    });
+                  }
+                } catch (err) {
+                  if (kDebugMode) {
+                    print(err);
+                  }
+                }
+              },
               onReceivedError: (controller, request, error) {
                 if (kDebugMode) {
                   print(" --------------------------------- onReceivedError ");
@@ -314,8 +287,7 @@ class MyAppState extends State<MyApp> {
               builder: (context, state, child) {
                 return SafeArea(
                   // 为搭建沉浸式App考虑放开
-                  top: (defaultTargetPlatform == TargetPlatform.android) ||
-                      !state,
+                  top: !state,
                   // 底部强制安全区
                   bottom: false,
                   child: _buildMainView(),

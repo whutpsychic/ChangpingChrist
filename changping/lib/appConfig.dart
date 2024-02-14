@@ -13,7 +13,7 @@ class Configure {
   // 连接到本地开发环境
   // =================== production 产品模式 ===================
   // 连接到正式环境
-  static const AppMode appMode = AppMode.dev;
+  static const AppMode appMode = AppMode.prodution;
 }
 
 // 最终控制结果
@@ -57,5 +57,6 @@ class StaticConfig {
   static const String argsSpliter = "|_|";
 
   // iOS AppStore 更新地址
-  static const String updateAppStoreUrl = "xxxxxxxxxxxxx";
+  static const String updateAppStoreUrl =
+      "https://apps.apple.com/cn/app/%E6%98%8C%E5%B9%B3%E6%95%99%E4%BC%9A/id6477804059";
 }

@@ -56,6 +56,8 @@ const introduceText = ref(description);
 
 <style scoped>
 .introduction {
+  font-family: 'HanYi';
+  font-size: 17px;
   margin-bottom: 0.5em;
   padding: 10px;
   color: #666;

@@ -1,5 +1,5 @@
 <template>
-  <van-nav-bar :style="`padding-top:${safeHeights.top}px;`" title="MBTI 性格测试" left-arrow @click-left="backup" />
+  <van-nav-bar class="top-nav-bar" :style="`padding-top:${safeHeights.top}px;`" title="MBTI 性格测试" left-arrow @click-left="backup" />
   <!-- 初始遮罩层 -->
   <van-popup v-model:show="showPreInfo" position="bottom" :style="{ height: 'calc(100%)' }">
     <p class="title">MBTI 性格测试</p>

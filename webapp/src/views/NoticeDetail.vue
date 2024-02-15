@@ -1,5 +1,5 @@
 <template>
-  <van-nav-bar :style="`padding-top:${safeHeights.top}px;`" title="通知" left-arrow @click-left="onClickLeft" />
+  <van-nav-bar class="top-nav-bar" :style="`padding-top:${safeHeights.top}px;`" title="通知" left-arrow @click-left="onClickLeft" />
   <div class="page-content">
     <p class="title">{{ mainData.title }}</p>
     <p class="date">{{ `发表于 ${mainData.date}` }}</p>

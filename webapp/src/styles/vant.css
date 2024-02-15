@@ -1,4 +1,8 @@
 /* van-nav-bar */
+.top-nav-bar {
+  box-shadow: 2px 2px 8px 2px rgba(150, 150, 150, 0.1);
+}
+
 /* 标题文字 */
 .topbar-title {
   font-family: 'HanYi';
@@ -6,6 +10,12 @@
   font-size: 22px;
 }
 
-.van-nav-bar__title {
-  --van-nav-bar-title-font-size: 17px;
+.bottom-tab-nav {
+  box-shadow: 2px 2px 16px 2px rgba(150, 150, 150, 0.6);
+}
+
+:root {
+  /* van-grid-item */
+  --van-grid-item-text-font-size: 15px;
+  --van-grid-item-icon-size: 32px;
 }

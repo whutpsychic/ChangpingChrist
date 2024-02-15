@@ -30,13 +30,16 @@ const router = createRouter({
       component: Home,
       children: [
         {
+          // 资讯
           path: '/home/info',
           component: HomeInfo,
         },
+        // 直播
         {
           path: '/home/live',
           component: HomeLive,
         },
+        // 娱乐
         {
           path: '/home/entertainment',
           component: HomeEntertainment,
@@ -57,6 +60,16 @@ const router = createRouter({
     {
       path: '/test-grace',
       component: () => import('../views/TestGrace.vue'),
+    },
+    // 所有测试页
+    {
+      path: '/all-tests',
+      component: () => import('../views/AllTests.vue'),
+    },
+    // 相册选择页
+    {
+      path: '/photo-album',
+      component: () => import('../views/PhotoAlbum.vue'),
     }
   ]
 })

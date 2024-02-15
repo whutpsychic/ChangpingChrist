@@ -1,5 +1,5 @@
 <template>
-  <van-nav-bar :style="`padding-top:${safeHeights.top}px;`" title="恩赐调查表" left-arrow @click-left="backup" />
+  <van-nav-bar class="top-nav-bar" :style="`padding-top:${safeHeights.top}px;`" title="恩赐调查表" left-arrow @click-left="backup" />
   <!-- 初始遮罩层 -->
   <van-popup v-model:show="showPreInfo" position="bottom" :style="{ height: 'calc(100%)' }">
     <p class="title">恩赐调查表</p>

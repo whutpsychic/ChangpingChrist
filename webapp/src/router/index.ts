@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import Preopen from '../views/Preopen.vue';
 import Home from '../views/Home.vue';
 import HomeInfo from '../views/HomeInfo.vue';
-import HomeLive from '../views/HomeLive.vue';
+// import HomeLive from '../views/HomeLive.vue';
 import HomeEntertainment from '../views/HomeEntertainment.vue';
 
 const router = createRouter({
@@ -37,7 +37,8 @@ const router = createRouter({
         // 直播
         {
           path: '/home/live',
-          component: HomeLive,
+          // component: HomeLive,
+          component: () => import('../views/HomeLive.vue'),
         },
         // 娱乐
         {

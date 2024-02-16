@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     LiveVideoCard: typeof import('./src/components/LiveVideoCard.vue')['default']
+    LivingIcon: typeof import('./src/components/LivingIcon.vue')['default']
     NoticeCard: typeof import('./src/components/NoticeCard.vue')['default']
     NoticeItem: typeof import('./src/components/NoticeItem.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

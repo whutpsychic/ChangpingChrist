@@ -5,38 +5,30 @@
       <img class="icon" alt="." src="@/assets/img/icon-changping.png" />
     </div>
     <div class="right-content">
-      <p class="title"><span>{{ props.title }}</span><span v-if="living" class="living-tips">正在直播</span></p>
+      <p class="title"><span>{{ props.title }}</span><span v-if="props.living" class="living-tips">正在直播</span></p>
       <p class="subtitle">
-        <span>每周日上午 8:00 至 09:30 主日礼拜；每周三、周五晚祷告。</span>
+        <span>{{ props.info }}</span>
       </p>
-      <LivingIcon v-if="living" />
+      <LivingIcon v-if="props.living" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
 import fc from '@/flutter-core/index.js';
-import api from '@/api/main';
 import LivingIcon from './LivingIcon.vue';
-
-const living = ref(false);
 
 const props = defineProps({
   title: { type: String, default: ' — ' },
   date: { type: String, default: ' — ' },
   url: { type: String, default: ' — ' },
+  info: { type: String, default: ' — ' },
+  living: { type: Boolean, default: false }
 });
 
 const _gotoLiveView = () => {
   fc.launchInnerExplorer(props.url);
 }
-
-onMounted(() => {
-  api.getLiveState().then((lv: boolean) => {
-    living.value = lv;
-  });
-});
 
 </script>
 <style scoped>

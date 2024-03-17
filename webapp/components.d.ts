@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AlbumItem: typeof import('./src/components/AlbumItem.vue')['default']
     LiveVideoCard: typeof import('./src/components/LiveVideoCard.vue')['default']
     LivingIcon: typeof import('./src/components/LivingIcon.vue')['default']
     NoticeCard: typeof import('./src/components/NoticeCard.vue')['default']
